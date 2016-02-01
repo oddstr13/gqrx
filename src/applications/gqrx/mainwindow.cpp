@@ -264,6 +264,7 @@ MainWindow::MainWindow(const QString cfgfile, bool edit_conf, QWidget *parent) :
     connect(remote, SIGNAL(newSquelchLevel(double)), this, SLOT(setSqlLevel(double)));
     connect(remote, SIGNAL(newSquelchLevel(double)), uiDockRxOpt, SLOT(setSquelchLevel(double)));
     connect(uiDockRxOpt, SIGNAL(sqlLevelChanged(double)), remote, SLOT(setSquelchLevel(double)));
+    connect(remote, SIGNAL(saveWaterfall(QString)), this, SLOT(remoteSaveWaterfall(QString)));
 
     // satellite events
     connect(remote, SIGNAL(satAosEvent()), uiDockAudio, SLOT(startAudioRecorder()));
@@ -1829,6 +1830,12 @@ void MainWindow::on_actionSaveWaterfall_triggered()
     // store the location used for the waterfall file
     QFileInfo fi(wffile);
     m_settings->setValue("wf_save_dir", fi.absolutePath());
+}
+
+void MainWindow::remoteSaveWaterfall(QString save_path) {
+    if (!ui->plotter->saveWaterfall(save_path)) {
+        qWarning() << "remoteSaveWaterfall: save failed.";
+    }
 }
 
 /** Show I/Q player. */

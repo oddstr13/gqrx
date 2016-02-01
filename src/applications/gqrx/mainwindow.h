@@ -208,6 +208,10 @@ private slots:
     void on_actionAboutQt_triggered();
     void on_actionAddBookmark_triggered();
 
+    /* remote control */
+    void remoteSaveWaterfall();
+
+
 
     /* window close signals */
     void afsk1200win_closed();

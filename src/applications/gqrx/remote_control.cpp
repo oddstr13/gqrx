@@ -307,6 +307,32 @@ void RemoteControl::startRead()
                          "0\n");
     }
 
+    else if (cmdlist[0] == "\\save_waterfall")
+    {
+        QString save_path = cmdlist.value(1, "");
+
+        if (!save_path.isEmpty())
+        {
+            QFileInfo path(save_path);
+
+            if (!path.exists() & path.dir().exists())
+            {
+                emit saveWaterfall(save_path);
+                rc_socket->write("RPRT 0\n");
+            }
+
+            else
+            {
+                rc_socket->write("RPRT 1\n");
+            }
+        }
+
+        else
+        {
+            rc_socket->write("RPRT 1\n");
+        }
+    }
+
     else
     {
         // print unknown command and respond with an error

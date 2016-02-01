@@ -92,6 +92,7 @@ signals:
     void newFilterOffset(qint64 offset);
     void newMode(int mode);
     void newSquelchLevel(double level);
+    void saveWaterfall(QString filename);
 
     void satAosEvent(void); /*! Satellite AOS event received through the socket. */
     void satLosEvent(void); /*! Satellite LOS event received through the socket. */
