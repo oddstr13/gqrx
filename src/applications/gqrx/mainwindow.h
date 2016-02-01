@@ -209,7 +209,7 @@ private slots:
     void on_actionAddBookmark_triggered();
 
     /* remote control */
-    void remoteSaveWaterfall();
+    void remoteSaveWaterfall(QString save_path);
 
 
 
